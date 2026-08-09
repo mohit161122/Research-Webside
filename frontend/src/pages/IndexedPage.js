@@ -61,7 +61,7 @@ function IndexedPage() {
           <Bookmark className="w-4 h-4" />
           <span>Scopus / Web of Science</span>
         </div>
-        <h1>Indexed <em>journal publications.</em></h1>
+        <h1>Indexed <em>journal publications.</em>  </h1>
         <p>
           High-impact papers indexed in international journals (Sheet 3.4.5).
         </p>

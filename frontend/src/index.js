@@ -1,0 +1,49 @@
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import SearchModal from './components/SearchModal';
+
+import HomePage from './pages/HomePage';
+import PapersPage from './pages/PapersPage';
+import IndexedPage from './pages/IndexedPage';
+import BooksPage from './pages/BooksPage';
+import DepartmentsPage from './pages/DepartmentsPage';
+import Aboutpage from './landing_page/aboutpage/Aboutpage';
+
+function App() {
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  return (
+    <div className="app-shell">
+      <Navbar onSearchToggle={() => setIsSearchOpen(true)} />
+      
+      <main className="flex-1">
+        <Routes>
+          <Route path="/" element={<HomePage onSearchOpen={() => setIsSearchOpen(true)} />} />
+          <Route path="/papers" element={<PapersPage />} />
+          <Route path="/indexed" element={<IndexedPage />} />
+          <Route path="/books" element={<BooksPage />} />
+          <Route path="/departments" element={<DepartmentsPage />} />
+          <Route path="/about" element={<Aboutpage />} />
+        </Routes>
+      </main>
+
+      <Footer />
+
+      <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>
+);

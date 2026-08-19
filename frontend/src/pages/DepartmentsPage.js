@@ -14,6 +14,7 @@ function DepartmentsPage() {
       .finally(() => setLoading(false));
   }, []);
 
+  
   return (
     <div className="archive-page home-width">
       

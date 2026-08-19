@@ -17,6 +17,7 @@ const images = [
   "https://images.unsplash.com/photo-1572120360610-d971b9d7767c?q=80&w=500&auto=format",
 ];
 
+
 function HomePage({ onSearchOpen }) {
   const [stats, setStats] = useState(null);
   const [featured, setFeatured] = useState({
@@ -98,7 +99,7 @@ function HomePage({ onSearchOpen }) {
             </div>
           </div>
 
-          <div className="w-1/2 ">
+          <div className="w-1/2 flex justify-center items-center ">
             <div style={{ width: 420, height: 520 }}>
               <Stack
                 randomRotation
@@ -117,7 +118,7 @@ function HomePage({ onSearchOpen }) {
                   />
                 ))}
                 autoplay
-                autoplayDelay={2000}
+                autoplayDelay={4000}
                 pauseOnHover
               />
             </div>

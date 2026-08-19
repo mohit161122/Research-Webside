@@ -20,7 +20,7 @@ function Navbar({ onSearchToggle }) {
     { name: "Research Papers", path: "/papers", icon: FileText },
     { name: "Indexed Journals", path: "/indexed", icon: Bookmark },
     { name: "Books & Chapters", path: "/books", icon: BookOpen },
-    { name: "Departments", path: "/departments", icon: Building2 },
+    // { name: "Departments", path: "/departments", icon: Building2 },
     { name: "About", path: "/about" },
   ];
 

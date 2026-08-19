@@ -58,9 +58,8 @@ function HomePage({ onSearchOpen }) {
 
   return (
     <div className="home-page">
-      <div className="container mx-auto mt-16 mr-6 px-4 ">
-        <div className="flex flex-wrap ">
-          <div className="w-1/2 ">
+      <div className="home-hero home-width">
+        <div className="home-hero-copy">
             <p className="eyebrow">
               <span className="eyebrow-dot" /> Message
             </p>
@@ -99,8 +98,8 @@ function HomePage({ onSearchOpen }) {
             </div>
           </div>
 
-          <div className="w-1/2 flex justify-center items-center ">
-            <div style={{ width: 420, height: 520 }}>
+          <div className="home-hero-visual">
+            <div className="home-stack-frame">
               <Stack
                 randomRotation
                 sensitivity={150}
@@ -124,29 +123,50 @@ function HomePage({ onSearchOpen }) {
             </div>
           </div>
         </div>
-      </div>
 
-      <section className="stat-strip home-width ">
-        <div>
-          <strong>{stats?.totalPapers || 0}</strong>
-          <span>RESEARCH PAPERS</span>
-        </div>
-        <i />
-        <div>
-          <strong>{stats?.totalIndexed || 0}</strong>
-          <span>INDEXED JOURNALS</span>
-        </div>
-        <i />
-        <div>
-          <strong>{stats?.totalBooks || 0}</strong>
-          <span>BOOKS & CHAPTERS</span>
-        </div>
-        <i />
-        <div>
-          <strong>{stats?.totalResearchers || 0}+</strong>
-          <span>RESEARCHERS</span>
-        </div>
-      </section>
+     <section className="stat-strip home-width grid grid-cols-2 gap-y-6 gap-x-2 sm:flex sm:items-center sm:justify-between sm:gap-0">
+  <div className="flex flex-col items-center text-center">
+    <strong className="text-2xl sm:text-3xl font-bold">
+      {stats?.totalPapers || 0}
+    </strong>
+    <span className="text-[10px] sm:text-xs tracking-wide">
+      RESEARCH PAPERS
+    </span>
+  </div>
+
+  <i className="hidden sm:block w-px h-8 bg-gray-300 not-italic" />
+
+  <div className="flex flex-col items-center text-center">
+    <strong className="text-2xl sm:text-3xl font-bold">
+      {stats?.totalIndexed || 0}
+    </strong>
+    <span className="text-[10px] sm:text-xs tracking-wide">
+      INDEXED JOURNALS
+    </span>
+  </div>
+
+  <i className="hidden sm:block w-px h-8 bg-gray-300 not-italic" />
+
+  <div className="flex flex-col items-center text-center">
+    <strong className="text-2xl sm:text-3xl font-bold">
+      {stats?.totalBooks || 0}
+    </strong>
+    <span className="text-[10px] sm:text-xs tracking-wide">
+      BOOKS & CHAPTERS
+    </span>
+  </div>
+
+  <i className="hidden sm:block w-px h-8 bg-gray-300 not-italic" />
+
+  <div className="flex flex-col items-center text-center">
+    <strong className="text-2xl sm:text-3xl font-bold">
+      {stats?.totalResearchers || 0}+
+    </strong>
+    <span className="text-[10px] sm:text-xs tracking-wide">
+      RESEARCHERS
+    </span>
+  </div>
+</section>
 
       {/* <section className="home-section home-width ">
         <div className="section-heading">
@@ -197,73 +217,74 @@ function HomePage({ onSearchOpen }) {
         </div>
       </section> */}
 
-      <div className="home-page mt-[50px]">
-        <h1 className="text-4xl font-bold tracking-tight text-center">
-          Pobons
-        </h1>
-        <div className="container mx-auto mt-16 px-3">
-          <div className="flex flex-wrap mt-[50px]">
-            <div className="w-1/3 mt-4 text-gray-500 text-center">
-              <img
-                src="Images/CEO-1.jpg"
-                className="rounded-full w-56 h-56 object-cover mx-auto"
-              />
-              <h5 className="text-base font-medium mt-2">Nithin Kamath</h5>
-              <p className="text-sm">Founder, CEO</p>
-            </div>
-            <div className="w-1/3 mt-4 text-gray-500 text-center">
-              <img
-                src="Images/CEO-1.jpg"
-                className="rounded-full w-56 h-56 object-cover mx-auto"
-              />
-              <h5 className="text-base font-medium mt-2">Nithin Kamath</h5>
-              <p className="text-sm">Founder, CEO</p>
-            </div>
-            <div className="w-1/3 mt-4 text-gray-500 text-center">
-              <img
-                src="Images/CEO-1.jpg"
-                className="rounded-full w-56 h-56 object-cover mx-auto"
-              />
-              <h5 className="text-base font-medium mt-2">Nithin Kamath</h5>
-              <p className="text-sm">Founder, CEO</p>
-            </div>
-          </div>
-        </div>
+
+    <div className="home-page mt-[50px]">
+  <h1 className="text-4xl font-bold tracking-tight text-center">
+    Pobons
+  </h1>
+  <div className="container mx-auto mt-16 px-3">
+    <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-8 gap-x-4 mt-[50px]">
+      <div className="text-gray-500 text-center">
+        <img
+          src="Images/CEO-1.jpg"
+          className="rounded-full w-24 h-24 sm:w-40 sm:h-40 md:w-56 md:h-56 object-cover mx-auto"
+        />
+        <h5 className="text-base font-medium mt-2">Nithin Kamath</h5>
+        <p className="text-sm">Founder, CEO</p>
       </div>
+      <div className="text-gray-500 text-center">
+        <img
+          src="Images/CEO-1.jpg"
+          className="rounded-full w-24 h-24 sm:w-40 sm:h-40 md:w-56 md:h-56 object-cover mx-auto"
+        />
+        <h5 className="text-base font-medium mt-2">Nithin Kamath</h5>
+        <p className="text-sm">Founder, CEO</p>
+      </div>
+      <div className="col-span-2 sm:col-span-1 w-1/2 sm:w-full mx-auto text-gray-500 text-center">
+        <img
+          src="Images/CEO-1.jpg"
+          className="rounded-full w-24 h-24 sm:w-40 sm:h-40 md:w-56 md:h-56 object-cover mx-auto"
+        />
+        <h5 className="text-base font-medium mt-2">Nithin Kamath</h5>
+        <p className="text-sm">Founder, CEO</p>
+      </div>
+    </div>
+  </div>
+</div>
 
       <div className="home-page mt-[50px]">
-        <h1 className="text-4xl font-bold tracking-tight text-center">
-          Capabens
-        </h1>
-        <div className="container mx-auto mt-16 px-3">
-          <div className="flex flex-wrap mt-[50px]">
-            <div className="w-1/3 mt-4 text-gray-500 text-center">
-              <img
-                src="Images/CEO-1.jpg"
-                className="rounded-full w-56 h-56 object-cover mx-auto"
-              />
-              <h5 className="text-base font-medium mt-2">Nithin Kamath</h5>
-              <p className="text-sm">Founder, CEO</p>
-            </div>
-            <div className="w-1/3 mt-4 text-gray-500 text-center">
-              <img
-                src="Images/CEO-1.jpg"
-                className="rounded-full w-56 h-56 object-cover mx-auto"
-              />
-              <h5 className="text-base font-medium mt-2">Nithin Kamath</h5>
-              <p className="text-sm">Founder, CEO</p>
-            </div>
-            <div className="w-1/3 mt-4 text-gray-500 text-center">
-              <img
-                src="Images/CEO-1.jpg"
-                className="rounded-full w-56 h-56 object-cover mx-auto"
-              />
-              <h5 className="text-base font-medium mt-2">Nithin Kamath</h5>
-              <p className="text-sm">Founder, CEO</p>
-            </div>
-          </div>
-        </div>
+  <h1 className="text-4xl font-bold tracking-tight text-center">
+    Pobons
+  </h1>
+  <div className="container mx-auto mt-16 px-3">
+    <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-8 gap-x-4 mt-[50px]">
+      <div className="text-gray-500 text-center">
+        <img
+          src="Images/CEO-1.jpg"
+          className="rounded-full w-24 h-24 sm:w-40 sm:h-40 md:w-56 md:h-56 object-cover mx-auto"
+        />
+        <h5 className="text-base font-medium mt-2">Nithin Kamath</h5>
+        <p className="text-sm">Founder, CEO</p>
       </div>
+      <div className="text-gray-500 text-center">
+        <img
+          src="Images/CEO-1.jpg"
+          className="rounded-full w-24 h-24 sm:w-40 sm:h-40 md:w-56 md:h-56 object-cover mx-auto"
+        />
+        <h5 className="text-base font-medium mt-2">Nithin Kamath</h5>
+        <p className="text-sm">Founder, CEO</p>
+      </div>
+      <div className="col-span-2 sm:col-span-1 w-1/2 sm:w-full mx-auto text-gray-500 text-center">
+        <img
+          src="Images/CEO-1.jpg"
+          className="rounded-full w-24 h-24 sm:w-40 sm:h-40 md:w-56 md:h-56 object-cover mx-auto"
+        />
+        <h5 className="text-base font-medium mt-2">Nithin Kamath</h5>
+        <p className="text-sm">Founder, CEO</p>
+      </div>
+    </div>
+  </div>
+</div>
 
       <section className="home-section home-width publications-section">
         <div className="section-heading compact">

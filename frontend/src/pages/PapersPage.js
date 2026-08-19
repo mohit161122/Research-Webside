@@ -74,7 +74,7 @@ function PapersPage() {
           <span>Research Showcase</span>
         </div>
         <h1>
-          Research Papers & Patents
+          Research  <em>Papers & Patents   </em> 
         </h1>
         <p>
           Browse and filter faculty research publications, patents, and scientific contributions.

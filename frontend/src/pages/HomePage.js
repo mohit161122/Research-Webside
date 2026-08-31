@@ -48,22 +48,6 @@ function HomePage({ onSearchOpen }) {
         "Shri Ramswaroop Memorial University, Barabanki"
       ],
     },
-    {
-      key: "director",
-      label: "Deputy Director Profile",
-      title: "Prof. (Dr.) Alkesh Agrawal",
-      designation: "Deputy Director",
-      image: "Images/Alkesh_Agrawal.webp",
-      excerpt:
-        "Driven by a collaborative research culture, the Deputy Director leads academic initiatives that connect innovation, industry engagement, and high-impact learning.",
-      fullContent: [
-        "Prof. (Dr.) Alkesh Agrawal plays a pivotal role in shaping SRMU's research ecosystem by advancing academic collaboration, innovation-led teaching, and industry-oriented problem solving.",
-        "Under his leadership, the institution continues to strengthen interdisciplinary programs, encourage faculty engagement in research, and create opportunities for students to work on meaningful, real-world challenges.",
-        "His focus on innovation, academic excellence, and institutional growth supports a broader vision of building a future-ready university where research is closely linked to practical impact and societal progress.",
-        "Through strategic partnerships, mentorship, and a strong emphasis on experimentation, he helps create an environment where ideas can mature into research outcomes, entrepreneurial opportunities, and lasting contributions to knowledge creation.",
-        
-      ],
-    },
   ];
 
   const activeProfileData = profileData.find((profile) => profile.key === activeProfile) || profileData[0];

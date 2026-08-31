@@ -246,30 +246,30 @@ function HomePage({ onSearchOpen }) {
           <div style={styles.peopleGrid}>
             <div style={styles.person}>
               <img
-                src="Images/CEO-1.jpg"
-                alt="Nithin Kamath"
+                src="Images\pankaj-DsE5rnwQ.webp"
+                alt="Er. Pankaj Agarwal"
                 style={styles.personImage}
               />
-              <h5 style={styles.personName}>Nithin Kamath</h5>
-              <p style={styles.personRole}>Founder, CEO</p>
+              <h5 style={styles.personName}>Er. Pankaj Agarwal</h5>
+              <p style={styles.personRole}>Chancellor</p>
             </div>
             <div style={styles.person}>
               <img
-                src="Images/CEO-1.jpg"
-                alt="Nithin Kamath"
+                src="Images\pooja-B1uI8fBS.webp"
+                alt="Er. Pooja Agarwal"
                 style={styles.personImage}
               />
-              <h5 style={styles.personName}>Nithin Kamath</h5>
-              <p style={styles.personRole}>Founder, CEO</p>
+              <h5 style={styles.personName}>Er. Pooja Agarwal</h5>
+              <p style={styles.personRole}>Pro Chancellor</p>
             </div>
             <div style={{ ...styles.person, gridColumn: isMobile ? "1 / -1" : "auto", justifySelf: isMobile ? "center" : "auto" }}>
               <img
-                src="Images/CEO-1.jpg"
-                alt="Nithin Kamath"
+                src="Images\vijaytiwari-DtLhXa4L.webp"
+                alt="Prof. (Dr.) Vijay Tiwari"
                 style={styles.personImage}
               />
-              <h5 style={styles.personName}>Nithin Kamath</h5>
-              <p style={styles.personRole}>Founder, CEO</p>
+              <h5 style={styles.personName}>Prof. (Dr.) Vijay Tiwari</h5>
+              <p style={styles.personRole}>Vice Chancellor</p>
             </div>
           </div>
         </div>
@@ -283,12 +283,12 @@ function HomePage({ onSearchOpen }) {
           <div style={styles.peopleGrid}>
             <div style={styles.person}>
               <img
-                src="Images/CEO-1.jpg"
-                alt="Nithin Kamath"
+                src="Images\Hemendra-NSaxOOgS.webp"
+                alt="Prof. (Dr.) Hemendra Sharma"
                 style={styles.personImage}
               />
-              <h5 style={styles.personName}>Nithin Kamath</h5>
-              <p style={styles.personRole}>Founder, CEO</p>
+              <h5 style={styles.personName}>Prof. (Dr.) Hemendra Sharma</h5>
+              <p style={styles.personRole}>Registrar</p>
             </div>
             <div style={styles.person}>
               <img
@@ -301,12 +301,12 @@ function HomePage({ onSearchOpen }) {
             </div>
             <div style={{ ...styles.person, gridColumn: isMobile ? "1 / -1" : "auto", justifySelf: isMobile ? "center" : "auto" }}>
               <img
-                src="Images/CEO-1.jpg"
-                alt="Nithin Kamath"
+                src="Images\Alkesh_Agrawal.webp"
+                alt="Prof. (Dr.) Alkesh Agrawal"
                 style={styles.personImage}
               />
-              <h5 style={styles.personName}>Nithin Kamath</h5>
-              <p style={styles.personRole}>Founder, CEO</p>
+              <h5 style={styles.personName}>Prof. (Dr.) Alkesh Agrawal</h5>
+              <p style={styles.personRole}>Deputy Director</p>
             </div>
           </div>
         </div>

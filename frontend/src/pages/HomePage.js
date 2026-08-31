@@ -23,6 +23,50 @@ function HomePage({ onSearchOpen }) {
   });
   const [departments, setDepartments] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [activeProfile, setActiveProfile] = useState("message");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const profileData = [
+    {
+      key: "message",
+      label: "R&C Cell Message",
+      title: "Research & Consultancy Cell",
+      designation: "R&C Cell",
+      image: "Images/CEO-1.jpg",
+      excerpt:
+        "At Shri Ramswaroop Memorial University (SRMU) Barabanki, we believe that research and innovation are fundamental drivers of academic excellence, technological advancement, and societal progress.",
+      fullContent: [
+        <h1 className="text-2xl font-bold text-charcoal-navy">Welcomes you all!</h1>,
+        "At Shri Ramswaroop Memorial University (SRMU) Barabanki, we believe that research and innovation are fundamental drivers of academic excellence, technological advancement, and societal progress. Our commitment is to cultivate a dynamic research ecosystem that empowers students, faculty members, and research scholars to transform ideas into impactful solutions.",
+        "The University has established state-of-the-art research and innovation facilities, including the AI Center of Excellence, Virtual Instrumentation Laboratory, Cadence Design Laboratory, PCB design Lab, Centre of Excellence (EV Lab), and the Innovation & Incubation Hub, which provide a robust platform for experimentation, product development, entrepreneurship, and interdisciplinary research. These facilities enable our researchers to engage with emerging technologies and address real-world challenges through innovative approaches.",
+        "A distinctive feature of SRMU's research framework is its emphasis on Experiment-Based Research. By integrating research-oriented projects into the learning process, we encourage researchers to develop critical thinking, problem-solving abilities, teamwork, and innovation skills. This approach bridges the gap between theoretical knowledge and practical application, preparing researchers to excel in both industry and academia.",
+        "The R&C cell actively promotes quality publications, industry collaborations, intellectual property creation, and startup incubation. R&C cell continuously strives to strengthen partnerships with academic institutions, research organizations, government agencies, and industry leaders to create opportunities for knowledge exchange and collaborative innovative research.",
+        "As we move forward in an era defined by rapid technological transformation, our focus remains on nurturing a culture of inquiry, creativity, ethical research practices, and entrepreneurial thinking. R&C Cell encourages research scholars and faculty members to explore new frontiers of knowledge and contribute meaningfully to national development and global progress.",
+        "R&C Cell invites you to explore the diverse research opportunities available at SRMU, Barabanki and become part of a community dedicated to excellence, innovation, and lifelong learning.",
+        "Together, let us create knowledge, inspire innovation, and shape a better future.",
+        <h1 className="text-2xl font-bold text-charcoal-navy">Research and Consultancy Cell</h1>,
+        "Shri Ramswaroop Memorial University, Barabanki"
+      ],
+    },
+    {
+      key: "director",
+      label: "Deputy Director Profile",
+      title: "Prof. (Dr.) Alkesh Agrawal",
+      designation: "Deputy Director",
+      image: "Images/Alkesh_Agrawal.webp",
+      excerpt:
+        "Driven by a collaborative research culture, the Deputy Director leads academic initiatives that connect innovation, industry engagement, and high-impact learning.",
+      fullContent: [
+        "Prof. (Dr.) Alkesh Agrawal plays a pivotal role in shaping SRMU's research ecosystem by advancing academic collaboration, innovation-led teaching, and industry-oriented problem solving.",
+        "Under his leadership, the institution continues to strengthen interdisciplinary programs, encourage faculty engagement in research, and create opportunities for students to work on meaningful, real-world challenges.",
+        "His focus on innovation, academic excellence, and institutional growth supports a broader vision of building a future-ready university where research is closely linked to practical impact and societal progress.",
+        "Through strategic partnerships, mentorship, and a strong emphasis on experimentation, he helps create an environment where ideas can mature into research outcomes, entrepreneurial opportunities, and lasting contributions to knowledge creation.",
+        
+      ],
+    },
+  ];
+
+  const activeProfileData = profileData.find((profile) => profile.key === activeProfile) || profileData[0];
 
   const isMobile = viewportWidth <= 800;
   const isSmallMobile = viewportWidth <= 480;
@@ -90,6 +134,19 @@ function HomePage({ onSearchOpen }) {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (!isModalOpen) return;
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setIsModalOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isModalOpen]);
+
   if (loading)
     return (
       <div style={{ minHeight: "60vh", display: "grid", placeContent: "center", gap: 12, color: "var(--color-pine-shadow)", fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: ".05em", textTransform: "uppercase" }}>
@@ -156,7 +213,15 @@ function HomePage({ onSearchOpen }) {
             interdisciplinary research. These facilities enable our
             researchers to engage with emerging technologies and address
             real-world challenges through innovative approaches.
+             <button
+            type="button"
+            onClick={() => setIsModalOpen(true)}
+            style={{ marginTop: 0, padding: 0, border: 0, background: "transparent", color: "var(--color-deep-teal)", fontWeight: 700, fontSize: 14, letterSpacing: "0.08em", textTransform: "uppercase", cursor: "pointer" }}
+          >
+            VIEW MORE →
+          </button>
           </p>
+         
           <div style={styles.actions}>
             <button onClick={onSearchOpen} style={{ display: "inline-flex", alignItems: "center", justifyContent: isSmallMobile ? "center" : "initial", gap: 8, background: "var(--color-deep-teal)", color: "#fff", fontFamily: "var(--font-sans)", fontSize: 14, fontWeight: 500, padding: "12px 24px", border: 0, borderRadius: "var(--radius-btn)", cursor: "pointer" }}>
               <Search size={17} /> Search the archive
@@ -192,6 +257,43 @@ function HomePage({ onSearchOpen }) {
           </div>
         </div>
       </div>
+
+     
+
+      {isModalOpen && (
+        <div
+          className="view-more-overlay"
+          onClick={() => setIsModalOpen(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="view-more-title"
+        >
+          <div
+            className="view-more-modal"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="view-more-close"
+              aria-label="Close modal"
+              onClick={() => setIsModalOpen(false)}
+            >
+              ✕
+            </button>
+
+            <div className="view-more-header">
+              <h3 id="view-more-title">{activeProfileData.title}</h3>
+              <p>{activeProfileData.designation}</p>
+            </div>
+
+            <div className="view-more-body">
+              {activeProfileData.fullContent.map((paragraph, index) => (
+                <p key={`${activeProfileData.key}-${index}`}>{paragraph}</p>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       <section style={{ ...styles.statStrip, ...styles.width }}>
         <div style={styles.stat}>

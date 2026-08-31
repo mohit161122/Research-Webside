@@ -31,8 +31,8 @@ function Navbar({ onSearchToggle }) {
       <div className="nav-inner">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5 no-underline group">
-          <div className="logo-mark">
-            <img src="Images\OIP.webp" alt="SRMU Research and Consultancy" />
+          <div className="logo-mark ">
+            <img src="Images\IMG-20210904-WA0042.jpg" alt="SRMU Research and Consultancy" />
           </div>
           <div>
             <div className="logo-type">

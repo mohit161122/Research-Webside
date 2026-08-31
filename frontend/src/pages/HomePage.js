@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
-  BookOpen,
-  Sparkles,
   ArrowRight,
   Search,
-  ScanSearch,
 } from "lucide-react";
 import PaperCard from "../components/PaperCard";
 import Stack from "../Effects/Stack";
@@ -17,6 +14,7 @@ const images = [
 
 
 function HomePage({ onSearchOpen }) {
+  const [viewportWidth, setViewportWidth] = useState(() => window.innerWidth);
   const [stats, setStats] = useState(null);
   const [featured, setFeatured] = useState({
     papers: [],
@@ -25,6 +23,51 @@ function HomePage({ onSearchOpen }) {
   });
   const [departments, setDepartments] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const isMobile = viewportWidth <= 800;
+  const isSmallMobile = viewportWidth <= 480;
+  const isTablet = viewportWidth > 800 && viewportWidth <= 1100;
+  const styles = {
+    page: { position: "relative", isolation: "isolate", overflow: "hidden", background: "var(--color-paper-white)" },
+    background: { position: "absolute", inset: 0, zIndex: -1, pointerEvents: "none", opacity: 0.5, width: "100%", height: "30%" },
+    width: { width: isMobile ? "calc(100% - 36px)" : "min(var(--page-max), calc(100% - 48px))", marginInline: "auto" },
+    hero: { minHeight: isMobile ? 0 : 540, display: "grid", gridTemplateColumns: isMobile ? "1fr" : isTablet ? "minmax(0, 1fr) minmax(300px, .8fr)" : "minmax(0, 1.05fr) minmax(360px, .95fr)", alignItems: "center", gap: isMobile ? (isSmallMobile ? 26 : 34) : isTablet ? 24 : 40, padding: isMobile ? "30px 0 38px" : "56px 0 48px" },
+    heroCopy: { minWidth: 0 },
+    title: { maxWidth: 650, fontFamily: "var(--font-serif)", lineHeight: 1.12, fontSize: isSmallMobile ? 32 : 36, fontWeight: 700, letterSpacing: "-0.025em", color: "#111827" },
+    lede: { maxWidth: 550, margin: "0 0 30px", fontSize: isMobile || isTablet ? 16 : 18, lineHeight: 1.55, color: "var(--color-slate)" },
+    heroVisual: { minWidth: 0, display: "grid", placeItems: "center" },
+    stackFrame: { width: `min(100%, ${isSmallMobile ? 280 : isMobile ? 320 : isTablet ? 320 : 380}px)`, height: isSmallMobile ? 350 : isMobile ? 400 : isTablet ? 400 : 480 },
+    actions: { display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 24, flexDirection: isSmallMobile ? "column" : "row", alignItems: isSmallMobile ? "stretch" : "initial" },
+    statStrip: { display: "flex", alignItems: isMobile ? "flex-start" : "center", justifyContent: isMobile ? "flex-start" : "space-around", gap: 20, padding: isSmallMobile ? "22px 16px" : "22px 24px", borderBlock: "1px solid var(--color-mint-mist)", background: "rgba(255,255,255,.35)", flexWrap: isMobile ? "wrap" : "nowrap" },
+    stat: { display: "flex", flexDirection: isMobile ? "column" : "row", alignItems: isMobile ? "center" : "baseline", gap: 10, width: isMobile ? (isSmallMobile ? "100%" : "calc(50% - 10px)") : "auto", textAlign: "center", fontFamily: "var(--font-mono)" },
+    statValue: { color: "var(--color-deep-teal)", fontSize: isSmallMobile ? 20 : 23, fontWeight: 600 },
+    statLabel: { color: "var(--color-charcoal-navy)", fontSize: isSmallMobile ? 10 : 11, letterSpacing: ".05em" },
+    divider: { display: isMobile ? "none" : "block", width: 1, height: 24, background: "var(--color-mint-mist)" },
+    peopleSection: { marginTop: 50 },
+    sectionTitle: { margin: 0, textAlign: "center", fontFamily: "var(--font-serif)", fontSize: 36, fontWeight: 700, letterSpacing: "-0.025em" },
+    peopleContainer: { maxWidth: 1200, margin: "64px auto 0", paddingInline: 12 },
+    peopleGrid: { display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: isMobile ? "24px 14px" : "32px 16px", marginTop: 50 },
+    person: { color: "#6b7280", textAlign: "center" },
+    personImage: { display: "block", width: isSmallMobile ? 140 : isMobile ? 160 : 224, height: isSmallMobile ? 140 : isMobile ? 160 : 224, objectFit: "cover", borderRadius: "50%", marginInline: "auto" },
+    personName: { margin: "8px 0 0", fontSize: 16, fontWeight: 500 },
+    personRole: { margin: 0, fontSize: 14 },
+    section: { paddingTop: 96 },
+    heading: { display: isMobile ? "block" : "flex", alignItems: "center", justifyContent: "space-between", gap: 40, marginBottom: 24 },
+    headingTitle: { margin: "13px 0 0", color: "var(--color-charcoal-navy)", fontFamily: "var(--font-serif)", fontSize: isMobile ? 35 : 38, fontWeight: 400, lineHeight: 1.12 },
+    publicationGrid: { display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: 20 },
+    departmentsBand: { marginTop: 96, padding: "72px 0 88px", background: "var(--color-blush-sand)", borderTop: "1px solid var(--color-dusty-rose)" },
+    departmentList: { display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(4, 1fr)", gap: 12 },
+    departmentLink: { minHeight: 150, display: "flex", flexDirection: "column", justifyContent: "space-between", padding: 20, color: "var(--color-charcoal-navy)", background: "rgba(242,248,247,.55)", border: "1px solid var(--color-dusty-rose)", borderRadius: "var(--radius-card)", textDecoration: "none" },
+    departmentMark: { color: "var(--color-deep-teal)", font: "25px var(--font-serif)" },
+    departmentName: { display: "block", font: "19px/1.25 var(--font-serif)" },
+    departmentCount: { display: "block", marginTop: 7, color: "var(--color-slate)", fontSize: 12 },
+  };
+
+  useEffect(() => {
+    const updateViewportWidth = () => setViewportWidth(window.innerWidth);
+    window.addEventListener("resize", updateViewportWidth);
+    return () => window.removeEventListener("resize", updateViewportWidth);
+  }, []);
 
   useEffect(() => {
     async function fetchData() {
@@ -49,17 +92,16 @@ function HomePage({ onSearchOpen }) {
 
   if (loading)
     return (
-      <div className="loading-state">
-        <span className="loading-dot" /> Loading the research archive
+      <div style={{ minHeight: "60vh", display: "grid", placeContent: "center", gap: 12, color: "var(--color-pine-shadow)", fontFamily: "var(--font-mono)", fontSize: 12, letterSpacing: ".05em", textTransform: "uppercase" }}>
+        <span style={{ width: 10, height: 10, margin: "auto", display: "block", borderRadius: "50%", background: "var(--color-deep-teal)" }} /> Loading the research archive
       </div>
     );
 
   return (
-    <div className="home-page">
+    <div style={styles.page}>
       <div
-        className="home-background"
         aria-hidden="true"
-        style={{ width: "100%", height: "30%" }}
+        style={styles.background}
       >
         <Topography
           lowColor="#5227FF"
@@ -85,20 +127,20 @@ function HomePage({ onSearchOpen }) {
           mouseStrength={0.4}
         />
       </div>
-      <div className="home-hero home-width">
-        <div className="home-hero-copy">
-          <p className="eyebrow">
-            <span className="eyebrow-dot" /> Message
+      <div style={{ ...styles.hero, ...styles.width }}>
+        <div style={styles.heroCopy}>
+          <p style={{ margin: 0, display: "flex", alignItems: "center", gap: 8, fontFamily: "var(--font-mono)", fontSize: 13, fontWeight: 600, letterSpacing: ".059em", textTransform: "uppercase", color: "var(--color-pine-shadow)" }}>
+            <span style={{ width: 7, height: 7, flex: "0 0 auto", display: "inline-block", borderRadius: "50%", background: "var(--color-sage)" }} /> Message
           </p>
           <br />
 
-          <div className="text-4xl font-bold tracking-tight text-gray-900">
+          <div style={styles.title}>
             The Research and Consultancy <br />
-            Cell <em className="text-[#1c5d5f]"> (R&C)</em>
+            Cell <em style={{ color: "var(--color-deep-teal)", fontStyle: "italic" }}> (R&C)</em>
           </div>
           <br />
 
-          <p className="hero-lede stat-strip home-width ">
+          <p style={{ ...styles.lede, ...styles.statStrip, width: "100%" }}>
             At Shri Ramswaroop Memorial University (SRMU) Barabanki, we
             believe that research and innovation are fundamental drivers of
             academic excellence, technological advancement, and societal
@@ -115,18 +157,18 @@ function HomePage({ onSearchOpen }) {
             researchers to engage with emerging technologies and address
             real-world challenges through innovative approaches.
           </p>
-          <div className="hero-actions mb-6">
-            <button onClick={onSearchOpen} className="btn-primary">
+          <div style={styles.actions}>
+            <button onClick={onSearchOpen} style={{ display: "inline-flex", alignItems: "center", justifyContent: isSmallMobile ? "center" : "initial", gap: 8, background: "var(--color-deep-teal)", color: "#fff", fontFamily: "var(--font-sans)", fontSize: 14, fontWeight: 500, padding: "12px 24px", border: 0, borderRadius: "var(--radius-btn)", cursor: "pointer" }}>
               <Search size={17} /> Search the archive
             </button>
-            <Link to="/papers" className="btn-ghost">
+            <Link to="/papers" style={{ display: "inline-flex", alignItems: "center", justifyContent: isSmallMobile ? "center" : "initial", gap: 8, background: "transparent", color: "var(--color-pine-shadow)", fontFamily: "var(--font-sans)", fontSize: 14, fontWeight: 500, padding: "11px 23px", border: "1px solid var(--color-pine-shadow)", borderRadius: "var(--radius-btn)", textDecoration: "none" }}>
               Browse publications <ArrowRight size={16} />
             </Link>
           </div>
         </div>
 
-        <div className="home-hero-visual">
-          <div className="home-stack-frame">
+        <div style={styles.heroVisual}>
+          <div style={styles.stackFrame}>
             <Stack
               randomRotation
               sensitivity={150}
@@ -151,163 +193,170 @@ function HomePage({ onSearchOpen }) {
         </div>
       </div>
 
-      <section className="stat-strip home-width grid grid-cols-2 gap-y-6 gap-x-2 sm:flex sm:items-center sm:justify-between sm:gap-0">
-        <div className="flex flex-col items-center text-center">
-          <strong className="text-2xl sm:text-3xl font-bold">
+      <section style={{ ...styles.statStrip, ...styles.width }}>
+        <div style={styles.stat}>
+          <strong style={styles.statValue}>
             {stats?.totalPapers || 0}
           </strong>
-          <span className="text-[10px] sm:text-xs tracking-wide">
+          <span style={styles.statLabel}>
             RESEARCH PAPERS
           </span>
         </div>
 
-        <i className="hidden sm:block w-px h-8 bg-gray-300 not-italic" />
+        <i style={styles.divider} />
 
-        <div className="flex flex-col items-center text-center">
-          <strong className="text-2xl sm:text-3xl font-bold">
+        <div style={styles.stat}>
+          <strong style={styles.statValue}>
             {stats?.totalIndexed || 0}
           </strong>
-          <span className="text-[10px] sm:text-xs tracking-wide">
+          <span style={styles.statLabel}>
             INDEXED JOURNALS
           </span>
         </div>
 
-        <i className="hidden sm:block w-px h-8 bg-gray-300 not-italic" />
+        <i style={styles.divider} />
 
-        <div className="flex flex-col items-center text-center">
-          <strong className="text-2xl sm:text-3xl font-bold">
+        <div style={styles.stat}>
+          <strong style={styles.statValue}>
             {stats?.totalBooks || 0}
           </strong>
-          <span className="text-[10px] sm:text-xs tracking-wide">
+          <span style={styles.statLabel}>
             BOOKS & CHAPTERS
           </span>
         </div>
 
-        <i className="hidden sm:block w-px h-8 bg-gray-300 not-italic" />
+        <i style={styles.divider} />
 
-        <div className="flex flex-col items-center text-center">
-          <strong className="text-2xl sm:text-3xl font-bold">
+        <div style={styles.stat}>
+          <strong style={styles.statValue}>
             {stats?.totalResearchers || 0}+
           </strong>
-          <span className="text-[10px] sm:text-xs tracking-wide">
+          <span style={styles.statLabel}>
             RESEARCHERS
           </span>
         </div>
       </section>
 
 
-      <div className="home-page mt-[50px]">
-        <h1 className="text-4xl font-bold tracking-tight text-center">
+      <div style={styles.peopleSection}>
+        <h1 style={styles.sectionTitle}>
           Pobons
         </h1>
-        <div className="container mx-auto mt-16 px-3">
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-8 gap-x-4 mt-[50px]">
-            <div className="text-gray-500 text-center">
+        <div style={styles.peopleContainer}>
+          <div style={styles.peopleGrid}>
+            <div style={styles.person}>
               <img
                 src="Images/CEO-1.jpg"
-                className="rounded-full w-24 h-24 sm:w-40 sm:h-40 md:w-56 md:h-56 object-cover mx-auto"
+                alt="Nithin Kamath"
+                style={styles.personImage}
               />
-              <h5 className="text-base font-medium mt-2">Nithin Kamath</h5>
-              <p className="text-sm">Founder, CEO</p>
+              <h5 style={styles.personName}>Nithin Kamath</h5>
+              <p style={styles.personRole}>Founder, CEO</p>
             </div>
-            <div className="text-gray-500 text-center">
+            <div style={styles.person}>
               <img
                 src="Images/CEO-1.jpg"
-                className="rounded-full w-24 h-24 sm:w-40 sm:h-40 md:w-56 md:h-56 object-cover mx-auto"
+                alt="Nithin Kamath"
+                style={styles.personImage}
               />
-              <h5 className="text-base font-medium mt-2">Nithin Kamath</h5>
-              <p className="text-sm">Founder, CEO</p>
+              <h5 style={styles.personName}>Nithin Kamath</h5>
+              <p style={styles.personRole}>Founder, CEO</p>
             </div>
-            <div className="col-span-2 sm:col-span-1 w-1/2 sm:w-full mx-auto text-gray-500 text-center">
+            <div style={{ ...styles.person, gridColumn: isMobile ? "1 / -1" : "auto", justifySelf: isMobile ? "center" : "auto" }}>
               <img
                 src="Images/CEO-1.jpg"
-                className="rounded-full w-24 h-24 sm:w-40 sm:h-40 md:w-56 md:h-56 object-cover mx-auto"
+                alt="Nithin Kamath"
+                style={styles.personImage}
               />
-              <h5 className="text-base font-medium mt-2">Nithin Kamath</h5>
-              <p className="text-sm">Founder, CEO</p>
+              <h5 style={styles.personName}>Nithin Kamath</h5>
+              <p style={styles.personRole}>Founder, CEO</p>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="home-page mt-[50px]">
-        <h1 className="text-4xl font-bold tracking-tight text-center">
+      <div style={styles.peopleSection}>
+        <h1 style={styles.sectionTitle}>
           Pobons
         </h1>
-        <div className="container mx-auto mt-16 px-3">
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-8 gap-x-4 mt-[50px]">
-            <div className="text-gray-500 text-center">
+        <div style={styles.peopleContainer}>
+          <div style={styles.peopleGrid}>
+            <div style={styles.person}>
               <img
                 src="Images/CEO-1.jpg"
-                className="rounded-full w-24 h-24 sm:w-40 sm:h-40 md:w-56 md:h-56 object-cover mx-auto"
+                alt="Nithin Kamath"
+                style={styles.personImage}
               />
-              <h5 className="text-base font-medium mt-2">Nithin Kamath</h5>
-              <p className="text-sm">Founder, CEO</p>
+              <h5 style={styles.personName}>Nithin Kamath</h5>
+              <p style={styles.personRole}>Founder, CEO</p>
             </div>
-            <div className="text-gray-500 text-center">
+            <div style={styles.person}>
               <img
                 src="Images/CEO-1.jpg"
-                className="rounded-full w-24 h-24 sm:w-40 sm:h-40 md:w-56 md:h-56 object-cover mx-auto"
+                alt="Nithin Kamath"
+                style={styles.personImage}
               />
-              <h5 className="text-base font-medium mt-2">Nithin Kamath</h5>
-              <p className="text-sm">Founder, CEO</p>
+              <h5 style={styles.personName}>Nithin Kamath</h5>
+              <p style={styles.personRole}>Founder, CEO</p>
             </div>
-            <div className="col-span-2 sm:col-span-1 w-1/2 sm:w-full mx-auto text-gray-500 text-center">
+            <div style={{ ...styles.person, gridColumn: isMobile ? "1 / -1" : "auto", justifySelf: isMobile ? "center" : "auto" }}>
               <img
                 src="Images/CEO-1.jpg"
-                className="rounded-full w-24 h-24 sm:w-40 sm:h-40 md:w-56 md:h-56 object-cover mx-auto"
+                alt="Nithin Kamath"
+                style={styles.personImage}
               />
-              <h5 className="text-base font-medium mt-2">Nithin Kamath</h5>
-              <p className="text-sm">Founder, CEO</p>
+              <h5 style={styles.personName}>Nithin Kamath</h5>
+              <p style={styles.personRole}>Founder, CEO</p>
             </div>
           </div>
         </div>
       </div>
 
-      <section className="home-section home-width publications-section">
-        <div className="section-heading compact">
+      <section style={{ ...styles.section, ...styles.width }}>
+        <div style={styles.heading}>
           <div>
-            <p className="eyebrow">
-              <span className="eyebrow-dot" /> RECENT NOTES
+            <p style={{ margin: 0, fontFamily: "var(--font-mono)", fontSize: 13, fontWeight: 600, letterSpacing: ".059em", textTransform: "uppercase", color: "var(--color-pine-shadow)" }}>
+              <span style={{ display: "inline-block", width: 7, height: 7, marginRight: 8, borderRadius: "50%", background: "var(--color-sage)" }} /> RECENT NOTES
             </p>
-            <h2>
-              Research Publication / patents/ <rm className="text-[#1c5d5f]">Books & chapters from...</rm>
+            <h2 style={styles.headingTitle}>
+              Research Publication / patents/ <rm style={{ color: "var(--color-deep-teal)" }}>Books & chapters from...</rm>
             </h2>
           </div>
-          <Link to="/papers" className="text-link">
+          <Link to="/papers" style={{ display: "inline-flex", alignItems: "center", gap: 7, color: "var(--color-pine-shadow)", fontSize: 14, fontWeight: 700, textDecoration: "none" }}>
             View all papers <ArrowRight size={15} />
           </Link>
         </div>
-        <div className="publication-grid">
+        <div style={styles.publicationGrid}>
           {featured.papers?.slice(0, 3).map((paper) => (
             <PaperCard key={paper.id} paper={paper} />
           ))}
         </div>
       </section>
 
-      <section className="departments-band">
-        <div className="home-width">
-          <div className="section-heading compact">
+      <section style={styles.departmentsBand}>
+        <div style={styles.width}>
+          <div style={styles.heading}>
             <div>
-              <p className="eyebrow">
-                <span className="eyebrow-dot rose" /> THE PEOPLE & PLACES
+              <p style={{ margin: 0, fontFamily: "var(--font-mono)", fontSize: 13, fontWeight: 600, letterSpacing: ".059em", textTransform: "uppercase", color: "var(--color-pine-shadow)" }}>
+                <span style={{ display: "inline-block", width: 7, height: 7, marginRight: 8, borderRadius: "50%", background: "var(--color-dusty-rose)" }} /> THE PEOPLE & PLACES
               </p>
-              <h2>Research across faculties</h2>
+              <h2 style={styles.headingTitle}>Research across faculties</h2>
             </div>
-            <Link to="/departments" className="btn-navy">
+            <Link to="/departments" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--color-ink-navy)", color: "#fff", fontFamily: "var(--font-sans)", fontSize: 14, fontWeight: 500, padding: "12px 24px", borderRadius: "var(--radius-btn)", textDecoration: "none" }}>
               See all faculties <ArrowRight size={15} />
             </Link>
           </div>
-          <div className="department-list">
+          <div style={styles.departmentList}>
             {departments.slice(0, 4).map((dept) => (
               <Link
                 key={dept.key}
                 to={`/papers?department=${encodeURIComponent(dept.key)}`}
+              style={styles.departmentLink}
               >
-                <span className="department-mark">{dept.icon || "·"}</span>
+                <span style={styles.departmentMark}>{dept.icon || "·"}</span>
                 <span>
-                  <strong>{dept.name}</strong>
-                  <small>{dept.count} publications</small>
+                  <strong style={styles.departmentName}>{dept.name}</strong>
+                  <small style={styles.departmentCount}>{dept.count} publications</small>
                 </span>
                 <ArrowRight size={17} />
               </Link>

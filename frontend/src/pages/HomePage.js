@@ -26,12 +26,12 @@ const sliderItems = [
   {
     image: "Images/J1.png",
     title: "Research Environment",
-    caption: "Innovation in motion",
+    caption: "Research papers.",
   },
   {
     image: "Images/J2.png",
     title: "Biosciences",
-    caption: "Scientific discovery",
+    caption: "Research papers.",
   },
 
 ];
@@ -239,31 +239,31 @@ function HomePage({ onSearchOpen }) {
           </div>
         </div>
 
-<div className="relative w-full min-w-0 mb-0 mt-20 grid place-items-center px-0 md:px-0" style={{ alignSelf: "stretch" }}>
-  <div className="w-full h-full mt-20" style={{ width: "min(46vw, 860px)", marginRight: 0 }}>
-    <div className="relative w-full aspect-[16/9] mt-20 py-0">
-      <MorphSlider
-        items={sliderItems}
-        transition="melt"
-        intensity={0.4}
-        aberration={0.35}
-        drift={0.55}
-        autoplay
-        overlayColor="rgba(28, 93, 95, 0.12)"
-        duration={1.6}
-        ease="power2.inOut"
-        scale={2.3}
-        autoplayDelay={4}
-        loop
-        radius={29}
-        fit="cover"
-        showCaptions
-        showControls
-        showIndicators
-      />
-    </div>
-  </div>
-</div>
+        <div className="relative w-full min-w-0 mb-0 mt-20 grid place-items-center px-0 md:px-0" style={{ alignSelf: "stretch" }}>
+          <div className="w-full h-full mt-20" style={{ width: "min(46vw, 860px)", marginRight: 0 }}>
+            <div className="relative w-full aspect-[16/9] mt-20  py-0">
+              <MorphSlider
+                items={sliderItems}
+                transition="melt"
+                intensity={0.4}
+                aberration={0.35}
+                drift={0.55}
+                autoplay
+                overlayColor="rgba(28, 93, 95, 0.12)"
+                duration={1.6}
+                ease="power2.inOut"
+                scale={2.3}
+                autoplayDelay={4}
+                loop
+                radius={29}
+                fit="cover"
+                showCaptions
+                showControls
+                showIndicators
+              />
+            </div>
+          </div>
+        </div>
 
 
 
@@ -439,22 +439,25 @@ function HomePage({ onSearchOpen }) {
             View all papers <ArrowRight size={15} />
           </Link>
         </div>
+        
+
+
         <div className="flex flex-col md:flex-row gap-4">
           {[
             {
-              src: "Images/Hemendra-NSaxOOgS.webp",
+              src: "Images/c1.webp",
               title: 'Institute of Technology',
               text: 'The Institute of Technology is committed to provide focused learning in the fields of engineering with an aim of creating human resources with knowledge and skills to contribute successfully to a complex world..',
               Department: '5 Departments',
             },
             {
-              src: "Images/Hemendra-NSaxOOgS.webp",
+              src: "Images/c2.jpg",
               title: 'Institute of Biosciences and Technology',
               text: 'Biotechnology encompasses the applications of understanding of the biological systems to improve human life by addressing challenges and issues facing agricultural sciences, medical sciences, food sciences, etc..',
               Department: '2 Departments',
             },
             {
-              src: "Images/Hemendra-NSaxOOgS.webp",
+              src: "Images/c3.webp",
               title: 'Institute of Management, Commerce and Economics',
               text: 'The Institute of Management, Commerce and Economics (IMCE) was started in the year 2012. IMCE seeks to be a trailblazer in management education through strong academic-industry collaboration for international alliances',
               Department: '2 Departments',
@@ -463,69 +466,15 @@ function HomePage({ onSearchOpen }) {
           ].map((card) => (
             <div key={card.title} className="flex-1 p-2">
               <ElectricBorder
+              
                 color="#94a3b8"
                 speed={0.5}
                 chaos={0.11}
                 thickness={2}
                 style={{ borderRadius: 18, background: 'rgba(255,255,255,0.55)', minHeight: 180 }}
               >
+
                 <div style={{ padding: 20 }}>
-                  <div>
-                    <img
-                      src={card.src}
-                      alt={card.title}
-                      style={{ width: '5000px', height: 120, objectFit: 'cover', borderRadius: 12 }}
-                    />
-                  </div>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--color-pine-shadow)' }}>
-                    Spotlight
-                  </div>
-                  <h3 style={{ margin: '12px 0 10px', fontFamily: 'var(--font-serif)', fontSize: 26, color: 'var(--color-charcoal-navy)' }}>
-                    {card.title}
-                  </h3>
-                  <p style={{ margin: 0, color: 'var(--color-slate-body)', lineHeight: 1.6, fontSize: 15 }}>
-                    {card.text}
-                  </p>
-                  <p className="mt-2 text-sm font-semibold text-deep-teal bold">
-                    {card.Department }
-                  </p>
-                </div>
-              </ElectricBorder>
-            </div>
-          ))}
-        </div>
-         <div className="flex flex-col md:flex-row gap-4">
-          {[
-            {
-              src: "Images/Hemendra-NSaxOOgS.webp",
-              title: 'Institute of Technology',
-              text: 'The Institute of Technology is committed to provide focused learning in the fields of engineering with an aim of creating human resources with knowledge and skills to contribute successfully to a complex world..',
-              Department: '5 Departments',
-            },
-            {
-              src: "Images/Hemendra-NSaxOOgS.webp",
-              title: 'Institute of Biosciences and Technology',
-              text: 'Biotechnology encompasses the applications of understanding of the biological systems to improve human life by addressing challenges and issues facing agricultural sciences, medical sciences, food sciences, etc..',
-              Department: '2 Departments',
-            },
-            {
-              src: "Images/Hemendra-NSaxOOgS.webp",
-              title: 'Institute of Management, Commerce and Economics',
-              text: 'The Institute of Management, Commerce and Economics (IMCE) was started in the year 2012. IMCE seeks to be a trailblazer in management education through strong academic-industry collaboration for international alliances',
-              Department: '2 Departments',
-
-            },
-          ].map((card) => (
-            <div key={card.title} className="flex-1 p-2">
-              <ElectricBorder
-                color="#94a3b8"
-                speed={0.5}
-                chaos={0.11}
-                thickness={2}
-                style={{ borderRadius: 18, background: 'rgba(255,255,255,0.55)', minHeight: 180 }}
-              >
-
-                <div style={{ padding: 20}}>
                   <div>
                     <img
                       src={card.src}
@@ -534,7 +483,7 @@ function HomePage({ onSearchOpen }) {
                     />
                   </div>
                   <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--color-pine-shadow)' }}>
-                    Spotlight
+                    SRMU
                   </div>
                   <h3 style={{ margin: '12px 0 10px', fontFamily: 'var(--font-serif)', fontSize: 26, color: 'var(--color-charcoal-navy)' }}>
                     {card.title}
@@ -543,7 +492,119 @@ function HomePage({ onSearchOpen }) {
                     {card.text}
                   </p>
                   <p className="mt-2 text-sm font-semibold text-deep-teal bold">
-                    {card.Department }
+                    {card.Department}
+                  </p>
+                </div>
+              </ElectricBorder>
+            </div>
+          ))}
+        </div>
+        <div className="flex flex-col md:flex-row gap-4">
+          {[
+            {
+              src: "Images/c4.jpg",
+              title: 'Institute of Media Studies',
+              text: 'Journalism and Mass Communication study is an encouragement to think about the forces involved in giving it shape. Mass Media industry is one of the fastest growing industries with the mission of social conscience..',
+              Department: '1 Departments',
+            },
+            {
+              src: "Images/c5.webp",
+              title: 'Institute of Natural Sciences and Humanities',
+              text: 'The Institute boasts of being the heart and soul of the University as its various disciplines of knowledge is essentially required with all the academic programs that run across the University.',
+              Department: '4 Departments',
+            },
+            {
+              src: "Images/c6.webp",
+              title: 'Institute of Pharmaceutical Sciences',
+              text: 'Due to its integration of chemistry and health sciences, pharmaceutical science is both a unique field and extremely important to human survival.',
+              Department: '1 Departments',
+
+            },
+          ].map((card) => (
+            <div key={card.title} className="flex-1 p-2">
+              <ElectricBorder
+                color="#94a3b8"
+                speed={0.5}
+                chaos={0.11}
+                thickness={2}
+                style={{ borderRadius: 18, background: 'rgba(255,255,255,0.55)', minHeight: 180 }}
+              >
+
+                <div style={{ padding: 20 }}>
+                  <div>
+                    <img
+                      src={card.src}
+                      alt={card.title}
+                      style={{ width: '500px', height: 180, objectFit: 'cover', borderRadius: 12 }}
+                    />
+                  </div>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--color-pine-shadow)' }}>
+                    SRMU
+                  </div>
+                  <h3 style={{ margin: '12px 0 10px', fontFamily: 'var(--font-serif)', fontSize: 26, color: 'var(--color-charcoal-navy)' }}>
+                    {card.title}
+                  </h3>
+                  <p style={{ margin: 0, color: 'var(--color-slate-body)', lineHeight: 1.6, fontSize: 15 }}>
+                    {card.text}
+                  </p>
+                  <p className="mt-2 text-sm font-semibold text-deep-teal bold">
+                    {card.Department}
+                  </p>
+                </div>
+              </ElectricBorder>
+            </div>
+          ))}
+        </div>
+        <div className="flex flex-col md:flex-row gap-4">
+          {[
+            {
+              src: "Images/c7.webp",
+              title: 'Institute of Agricultural Sciences and Technology',
+              text: 'The Indian Council of Agricultural Sciences has already recognized the B.Sc.(Hons.) Agriculture 4 Years as a professional Degree with consequential benefits to the Students..',
+              Department: '1 Departments',
+            },
+            {
+              src: "Images/c8.avif",
+              title: 'Institute of Legal Studies',
+              text: 'The Institute of Legal Studies is a convergence of academic, cultural and intellectual resources. It aims at achieving the highest levels of distinction in the innovation and transmission of knowledge and understanding.',
+              Department: '1 Departments',
+            },
+            {
+              src: "Images/c9.webp",
+              title: 'Institute of Pharmacy',
+              text: 'Pharmacy is one of the unique professions and also very vital for the sustenance of human lives as it involves the combination of chemical science with health sciences.',
+              Department: '1 Departments',
+
+            },
+          ].map((card) => (
+            <div key={card.title} className="flex-1 p-2">
+              <ElectricBorder
+                color="#94a3b8"
+                speed={0.5}
+                chaos={0.11}
+                thickness={2}
+                style={{ borderRadius: 18, background: 'rgba(255,255,255,0.55)', minHeight: 180 }}
+              >
+
+                <div style={{ padding: 20 }} className="mb-10">
+                  <div>
+                    <img
+                      src={card.src}
+                      alt={card.title}
+                      style={{ width: '500px', height: 180, objectFit: 'cover', borderRadius: 12 }}
+                    />
+                  </div>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--color-pine-shadow)' }}>
+                    SRMU
+                  </div>
+                  <h3 style={{ margin: '12px 0 10px', fontFamily: 'var(--font-serif)', fontSize: 26, color: 'var(--color-charcoal-navy)' }}>
+                    {card.title}
+                  </h3>
+                  <p style={{ margin: 0, color: 'var(--color-slate-body)', lineHeight: 1.6, fontSize: 15 }}>
+                    {card.text}
+                  </p>
+                  <p className="mt-2 text-sm font-semibold text-deep-teal bold">
+                    {card.Department}
                   </p>
                 </div>
               </ElectricBorder>
@@ -553,52 +614,6 @@ function HomePage({ onSearchOpen }) {
 
       </section>
 
-     
-
-    
-
-
-
-
-
-
-      {/* <div style={styles.publicationGrid} className="mb-10">
-          {featured.papers?.slice(0, 3).map((paper) => (
-            <PaperCard key={paper.id} paper={paper} />
-          ))}
-        </div> */}
-
-      {/* <section style={styles.departmentsBand}>
-        <div style={styles.width}>
-          <div style={styles.heading}>
-            <div>
-              <p style={{ margin: 0, fontFamily: "var(--font-mono)", fontSize: 13, fontWeight: 600, letterSpacing: ".059em", textTransform: "uppercase", color: "var(--color-pine-shadow)" }}>
-                <span style={{ display: "inline-block", width: 7, height: 7, marginRight: 8, borderRadius: "50%", background: "var(--color-dusty-rose)" }} /> THE PEOPLE & PLACES
-              </p>
-              <h2 style={styles.headingTitle}>Research across faculties</h2>
-            </div>
-            <Link to="/departments" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--color-ink-navy)", color: "#fff", fontFamily: "var(--font-sans)", fontSize: 14, fontWeight: 500, padding: "12px 24px", borderRadius: "var(--radius-btn)", textDecoration: "none" }}>
-              See all faculties <ArrowRight size={15} />
-            </Link>
-          </div>
-          <div style={styles.departmentList}>
-            {departments.slice(0, 4).map((dept) => (
-              <Link
-                key={dept.key}
-                to={`/papers?department=${encodeURIComponent(dept.key)}`}
-              style={styles.departmentLink}
-              >
-                <span style={styles.departmentMark}>{dept.icon || "·"}</span>
-                <span>
-                  <strong style={styles.departmentName}>{dept.name}</strong>
-                  <small style={styles.departmentCount}>{dept.count} publications</small>
-                </span>
-                <ArrowRight size={17} />
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section> */}
     </div>
   );
 }

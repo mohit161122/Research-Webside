@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { GraduationCap, ExternalLink } from 'lucide-react';
+import { GraduationCap } from 'lucide-react';
 
 function Footer() {
   return (

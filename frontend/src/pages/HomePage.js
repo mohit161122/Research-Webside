@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
@@ -7,11 +7,34 @@ import {
 import PaperCard from "../components/PaperCard";
 import Stack from "../Effects/Stack";
 import Topography from "../Effects/Topography";
+import ElectricBorder from "../Effects/Electric_Border";
+import MorphSlider from '../Effects/Morph-Slider';
 
-const images = [
-    
+
+
+
+const morphSliderFixStyles = `
+  .morph-slider-fix img,
+  .morph-slider-fix picture,
+  .morph-slider-fix [class*="slide"] img {
+    object-fit: contain !important;
+    background: #05060a;
+  }
+`;
+
+const sliderItems = [
+  {
+    image: "Images/J1.png",
+    title: "Research Environment",
+    caption: "Innovation in motion",
+  },
+  {
+    image: "Images/J2.png",
+    title: "Biosciences",
+    caption: "Scientific discovery",
+  },
+
 ];
-
 
 function HomePage({ onSearchOpen }) {
   const [viewportWidth, setViewportWidth] = useState(() => window.innerWidth);
@@ -59,12 +82,12 @@ function HomePage({ onSearchOpen }) {
     page: { position: "relative", isolation: "isolate", overflow: "hidden", background: "var(--color-paper-white)" },
     background: { position: "absolute", inset: 0, zIndex: -1, pointerEvents: "none", opacity: 0.5, width: "100%", height: "30%" },
     width: { width: isMobile ? "calc(100% - 36px)" : "min(var(--page-max), calc(100% - 48px))", marginInline: "auto" },
-    hero: { minHeight: isMobile ? 0 : 540, display: "grid", gridTemplateColumns: isMobile ? "1fr" : isTablet ? "minmax(0, 1fr) minmax(300px, .8fr)" : "minmax(0, 1.05fr) minmax(360px, .95fr)", alignItems: "center", gap: isMobile ? (isSmallMobile ? 26 : 34) : isTablet ? 24 : 40, padding: isMobile ? "30px 0 38px" : "56px 0 48px" },
+    hero: { minHeight: isMobile ? 0 : 540, display: "grid", gridTemplateColumns: isMobile ? "1fr" : isTablet ? "minmax(0, 1fr) minmax(300px, .8fr)" : "minmax(0, 1.05fr) minmax(360px, .95fr)", alignItems: "center", gap: isMobile ? (isSmallMobile ? 26 : 34) : isTablet ? 24 : 5, padding: isMobile ? "30px 0 38px" : "10px 0 48px" },
     heroCopy: { minWidth: 0 },
     title: { maxWidth: 650, fontFamily: "var(--font-serif)", lineHeight: 1.12, fontSize: isSmallMobile ? 32 : 36, fontWeight: 700, letterSpacing: "-0.025em", color: "#111827" },
     lede: { maxWidth: 550, margin: "0 0 30px", fontSize: isMobile || isTablet ? 16 : 18, lineHeight: 1.55, color: "var(--color-slate)" },
-    heroVisual: { minWidth: 0, display: "grid", placeItems: "center" },
-    stackFrame: { width: `min(100%, ${isSmallMobile ? 280 : isMobile ? 320 : isTablet ? 320 : 380}px)`, height: isSmallMobile ? 350 : isMobile ? 400 : isTablet ? 400 : 480 },
+    heroVisual: { minWidth: 0, display: "grid", placeItems: "center", width: "100%", paddingLeft: isMobile ? 0 : 12, paddingRight: isMobile ? 0 : 12, marginLeft: isMobile ? 0 : 8 },
+    stackFrame: { width: `min(100%, ${isSmallMobile ? 280 : isMobile ? 320 : isTablet ? 320 : 380}px)`, height: isSmallMobile ? 350 : isMobile ? 400 : isTablet ? 400 : 480, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto", padding: isSmallMobile ? "0 0px" : "0 8px" },
     actions: { display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 24, flexDirection: isSmallMobile ? "column" : "row", alignItems: isSmallMobile ? "stretch" : "initial" },
     statStrip: { display: "flex", alignItems: isMobile ? "flex-start" : "center", justifyContent: isMobile ? "flex-start" : "space-around", gap: 20, padding: isSmallMobile ? "22px 16px" : "22px 24px", borderBlock: "1px solid var(--color-mint-mist)", background: "rgba(255,255,255,.35)", flexWrap: isMobile ? "wrap" : "nowrap" },
     stat: { display: "flex", flexDirection: isMobile ? "column" : "row", alignItems: isMobile ? "center" : "baseline", gap: 10, width: isMobile ? (isSmallMobile ? "100%" : "calc(50% - 10px)") : "auto", textAlign: "center", fontFamily: "var(--font-mono)" },
@@ -197,15 +220,15 @@ function HomePage({ onSearchOpen }) {
             interdisciplinary research. These facilities enable our
             researchers to engage with emerging technologies and address
             real-world challenges through innovative approaches.
-             <button
-            type="button"
-            onClick={() => setIsModalOpen(true)}
-            style={{ marginTop: 0, padding: 0, border: 0, background: "transparent", color: "var(--color-deep-teal)", fontWeight: 700, fontSize: 14, letterSpacing: "0.08em", textTransform: "uppercase", cursor: "pointer" }}
-          >
-            VIEW MORE →
-          </button>
+            <button
+              type="button"
+              onClick={() => setIsModalOpen(true)}
+              style={{ marginTop: 0, padding: 0, border: 0, background: "transparent", color: "var(--color-deep-teal)", fontWeight: 700, fontSize: 14, letterSpacing: "0.08em", textTransform: "uppercase", cursor: "pointer" }}
+            >
+              VIEW MORE →
+            </button>
           </p>
-         
+
           <div style={styles.actions}>
             <button onClick={onSearchOpen} style={{ display: "inline-flex", alignItems: "center", justifyContent: isSmallMobile ? "center" : "initial", gap: 8, background: "var(--color-deep-teal)", color: "#fff", fontFamily: "var(--font-sans)", fontSize: 14, fontWeight: 500, padding: "12px 24px", border: 0, borderRadius: "var(--radius-btn)", cursor: "pointer" }}>
               <Search size={17} /> Search the archive
@@ -216,33 +239,37 @@ function HomePage({ onSearchOpen }) {
           </div>
         </div>
 
-        <div style={styles.heroVisual}>
-          <div style={styles.stackFrame}>
-            <Stack
-              randomRotation
-              sensitivity={150}
-              sendToBackOnClick={true}
-              cards={images.map((src, i) => (
-                <img
-                  key={i}
-                  src={src}
-                  alt={`card-${i + 1}`}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                  }}
-                />
-              ))}
-              autoplay
-              autoplayDelay={4000}
-              pauseOnHover
-            />
-          </div>
-        </div>
+<div className="relative w-full min-w-0 mb-0 mt-20 grid place-items-center px-0 md:px-0" style={{ alignSelf: "stretch" }}>
+  <div className="w-full h-full mt-20" style={{ width: "min(46vw, 860px)", marginRight: 0 }}>
+    <div className="relative w-full aspect-[16/9] mt-20 py-0">
+      <MorphSlider
+        items={sliderItems}
+        transition="melt"
+        intensity={0.4}
+        aberration={0.35}
+        drift={0.55}
+        autoplay
+        overlayColor="rgba(28, 93, 95, 0.12)"
+        duration={1.6}
+        ease="power2.inOut"
+        scale={2.3}
+        autoplayDelay={4}
+        loop
+        radius={29}
+        fit="cover"
+        showCaptions
+        showControls
+        showIndicators
+      />
+    </div>
+  </div>
+</div>
+
+
+
       </div>
 
-     
+
 
       {isModalOpen && (
         <div
@@ -404,7 +431,7 @@ function HomePage({ onSearchOpen }) {
             <p style={{ margin: 0, fontFamily: "var(--font-mono)", fontSize: 13, fontWeight: 600, letterSpacing: ".059em", textTransform: "uppercase", color: "var(--color-pine-shadow)" }}>
               <span style={{ display: "inline-block", width: 7, height: 7, marginRight: 8, borderRadius: "50%", background: "var(--color-sage)" }} /> RECENT NOTES
             </p>
-            <h2 style={styles.headingTitle}>  
+            <h2 style={styles.headingTitle}>
               Research Publication / Patents/ <rm style={{ color: "var(--color-deep-teal)" }}>Books & Chapters from...</rm>
             </h2>
           </div>
@@ -412,12 +439,134 @@ function HomePage({ onSearchOpen }) {
             View all papers <ArrowRight size={15} />
           </Link>
         </div>
-        <div style={styles.publicationGrid} className="mb-10">
+        <div className="flex flex-col md:flex-row gap-4">
+          {[
+            {
+              src: "Images/Hemendra-NSaxOOgS.webp",
+              title: 'Institute of Technology',
+              text: 'The Institute of Technology is committed to provide focused learning in the fields of engineering with an aim of creating human resources with knowledge and skills to contribute successfully to a complex world..',
+              Department: '5 Departments',
+            },
+            {
+              src: "Images/Hemendra-NSaxOOgS.webp",
+              title: 'Institute of Biosciences and Technology',
+              text: 'Biotechnology encompasses the applications of understanding of the biological systems to improve human life by addressing challenges and issues facing agricultural sciences, medical sciences, food sciences, etc..',
+              Department: '2 Departments',
+            },
+            {
+              src: "Images/Hemendra-NSaxOOgS.webp",
+              title: 'Institute of Management, Commerce and Economics',
+              text: 'The Institute of Management, Commerce and Economics (IMCE) was started in the year 2012. IMCE seeks to be a trailblazer in management education through strong academic-industry collaboration for international alliances',
+              Department: '2 Departments',
+
+            },
+          ].map((card) => (
+            <div key={card.title} className="flex-1 p-2">
+              <ElectricBorder
+                color="#94a3b8"
+                speed={0.5}
+                chaos={0.11}
+                thickness={2}
+                style={{ borderRadius: 18, background: 'rgba(255,255,255,0.55)', minHeight: 180 }}
+              >
+                <div style={{ padding: 20 }}>
+                  <div>
+                    <img
+                      src={card.src}
+                      alt={card.title}
+                      style={{ width: '5000px', height: 120, objectFit: 'cover', borderRadius: 12 }}
+                    />
+                  </div>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--color-pine-shadow)' }}>
+                    Spotlight
+                  </div>
+                  <h3 style={{ margin: '12px 0 10px', fontFamily: 'var(--font-serif)', fontSize: 26, color: 'var(--color-charcoal-navy)' }}>
+                    {card.title}
+                  </h3>
+                  <p style={{ margin: 0, color: 'var(--color-slate-body)', lineHeight: 1.6, fontSize: 15 }}>
+                    {card.text}
+                  </p>
+                  <p className="mt-2 text-sm font-semibold text-deep-teal bold">
+                    {card.Department }
+                  </p>
+                </div>
+              </ElectricBorder>
+            </div>
+          ))}
+        </div>
+         <div className="flex flex-col md:flex-row gap-4">
+          {[
+            {
+              src: "Images/Hemendra-NSaxOOgS.webp",
+              title: 'Institute of Technology',
+              text: 'The Institute of Technology is committed to provide focused learning in the fields of engineering with an aim of creating human resources with knowledge and skills to contribute successfully to a complex world..',
+              Department: '5 Departments',
+            },
+            {
+              src: "Images/Hemendra-NSaxOOgS.webp",
+              title: 'Institute of Biosciences and Technology',
+              text: 'Biotechnology encompasses the applications of understanding of the biological systems to improve human life by addressing challenges and issues facing agricultural sciences, medical sciences, food sciences, etc..',
+              Department: '2 Departments',
+            },
+            {
+              src: "Images/Hemendra-NSaxOOgS.webp",
+              title: 'Institute of Management, Commerce and Economics',
+              text: 'The Institute of Management, Commerce and Economics (IMCE) was started in the year 2012. IMCE seeks to be a trailblazer in management education through strong academic-industry collaboration for international alliances',
+              Department: '2 Departments',
+
+            },
+          ].map((card) => (
+            <div key={card.title} className="flex-1 p-2">
+              <ElectricBorder
+                color="#94a3b8"
+                speed={0.5}
+                chaos={0.11}
+                thickness={2}
+                style={{ borderRadius: 18, background: 'rgba(255,255,255,0.55)', minHeight: 180 }}
+              >
+
+                <div style={{ padding: 20}}>
+                  <div>
+                    <img
+                      src={card.src}
+                      alt={card.title}
+                      style={{ width: '500px', height: 180, objectFit: 'cover', borderRadius: 12 }}
+                    />
+                  </div>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--color-pine-shadow)' }}>
+                    Spotlight
+                  </div>
+                  <h3 style={{ margin: '12px 0 10px', fontFamily: 'var(--font-serif)', fontSize: 26, color: 'var(--color-charcoal-navy)' }}>
+                    {card.title}
+                  </h3>
+                  <p style={{ margin: 0, color: 'var(--color-slate-body)', lineHeight: 1.6, fontSize: 15 }}>
+                    {card.text}
+                  </p>
+                  <p className="mt-2 text-sm font-semibold text-deep-teal bold">
+                    {card.Department }
+                  </p>
+                </div>
+              </ElectricBorder>
+            </div>
+          ))}
+        </div>
+
+      </section>
+
+     
+
+    
+
+
+
+
+
+
+      {/* <div style={styles.publicationGrid} className="mb-10">
           {featured.papers?.slice(0, 3).map((paper) => (
             <PaperCard key={paper.id} paper={paper} />
           ))}
-        </div>
-      </section>
+        </div> */}
 
       {/* <section style={styles.departmentsBand}>
         <div style={styles.width}>

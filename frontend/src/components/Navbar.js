@@ -4,11 +4,9 @@ import {
   BookOpen,
   FileText,
   Bookmark,
-  Building2,
   Search,
   Menu,
   X,
-  GraduationCap,
 } from "lucide-react";
 
 function Navbar({ onSearchToggle }) {

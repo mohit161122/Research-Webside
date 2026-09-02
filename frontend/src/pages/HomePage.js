@@ -326,7 +326,7 @@ function HomePage({ onSearchOpen }) {
 
       <div style={styles.peopleSection}>
         <h1 style={styles.sectionTitle}>
-          Pobons
+          Patrons
         </h1>
         <div style={styles.peopleContainer}>
           <div style={styles.peopleGrid}>
@@ -363,7 +363,7 @@ function HomePage({ onSearchOpen }) {
 
       <div style={styles.peopleSection}>
         <h1 style={styles.sectionTitle}>
-          Pobons
+          Co Patrons
         </h1>
         <div style={styles.peopleContainer}>
           <div style={styles.peopleGrid}>
@@ -378,12 +378,12 @@ function HomePage({ onSearchOpen }) {
             </div>
             <div style={styles.person}>
               <img
-                src="Images/CEO-1.jpg"
-                alt="Nithin Kamath"
+                src="Images\Nabeel-Ahmad.jpeg"
+                alt="Nabeel Ahmad"
                 style={styles.personImage}
               />
-              <h5 style={styles.personName}>Nithin Kamath</h5>
-              <p style={styles.personRole}>Founder, CEO</p>
+              <h5 style={styles.personName}>Nabeel Ahmad</h5>
+              <p style={styles.personRole}>Research Director</p>
             </div>
             <div style={{ ...styles.person, gridColumn: isMobile ? "1 / -1" : "auto", justifySelf: isMobile ? "center" : "auto" }}>
               <img
@@ -404,22 +404,22 @@ function HomePage({ onSearchOpen }) {
             <p style={{ margin: 0, fontFamily: "var(--font-mono)", fontSize: 13, fontWeight: 600, letterSpacing: ".059em", textTransform: "uppercase", color: "var(--color-pine-shadow)" }}>
               <span style={{ display: "inline-block", width: 7, height: 7, marginRight: 8, borderRadius: "50%", background: "var(--color-sage)" }} /> RECENT NOTES
             </p>
-            <h2 style={styles.headingTitle}>
-              Research Publication / patents/ <rm style={{ color: "var(--color-deep-teal)" }}>Books & chapters from...</rm>
+            <h2 style={styles.headingTitle}>  
+              Research Publication / Patents/ <rm style={{ color: "var(--color-deep-teal)" }}>Books & Chapters from...</rm>
             </h2>
           </div>
           <Link to="/papers" style={{ display: "inline-flex", alignItems: "center", gap: 7, color: "var(--color-pine-shadow)", fontSize: 14, fontWeight: 700, textDecoration: "none" }}>
             View all papers <ArrowRight size={15} />
           </Link>
         </div>
-        <div style={styles.publicationGrid}>
+        <div style={styles.publicationGrid} className="mb-10">
           {featured.papers?.slice(0, 3).map((paper) => (
             <PaperCard key={paper.id} paper={paper} />
           ))}
         </div>
       </section>
 
-      <section style={styles.departmentsBand}>
+      {/* <section style={styles.departmentsBand}>
         <div style={styles.width}>
           <div style={styles.heading}>
             <div>
@@ -449,7 +449,7 @@ function HomePage({ onSearchOpen }) {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }

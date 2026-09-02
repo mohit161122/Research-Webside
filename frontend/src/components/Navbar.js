@@ -17,8 +17,8 @@ function Navbar({ onSearchToggle }) {
 
   const navLinks = [
     // { name: 'Home', path: '/' },
-    { name: "Research Papers", path: "/papers", icon: FileText },
-    { name: "Indexed Journals", path: "/indexed", icon: Bookmark },
+    { name: "Research Publications", path: "/indexed", icon: Bookmark },
+    { name: "Patents", path: "/papers", icon: FileText },
     { name: "Books & Chapters", path: "/books", icon: BookOpen },
     // { name: "Departments", path: "/departments", icon: Building2 },
     { name: "About", path: "/about" },

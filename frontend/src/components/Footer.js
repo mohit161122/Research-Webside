@@ -19,7 +19,7 @@ function Footer() {
               </span>
             </div>
             <p style={{ fontSize: 13, color: 'var(--color-slate-body)', lineHeight: 1.6 }}>
-              Shri Ramswaroop Memorial University Research Showcase Portal. Showcasing faculty publications, patents, indexed journals, and books.
+              Shri Ramswaroop Memorial University Research & Consultancy Cell, showcasing high impact research publications, patents, books and book chapters.
             </p>
           </div>
 
@@ -28,10 +28,10 @@ function Footer() {
             <div className="eyebrow" style={{ fontSize: 12 }}>Explore</div>
             <div className="flex flex-col gap-2.5">
               {[
-                { label: 'Research Papers', to: '/papers' },
-                { label: 'Indexed Journals', to: '/indexed' },
+                { label: 'Research Publications', to: '/indexed' },
+                { label: 'Patents', to: '/papers' },
                 { label: 'Books & Chapters', to: '/books' },
-                { label: 'Departments', to: '/departments' },
+                { label: 'About', to: '/about' },
               ].map(l => (
                 <Link key={l.to} to={l.to} style={{ fontSize: 14, color: 'var(--color-charcoal-navy)', textDecoration: 'none' }}
                   className="hover:text-deep-teal transition-colors"
@@ -42,30 +42,29 @@ function Footer() {
 
           {/* Faculties */}
           <div className="flex flex-col gap-4">
-            <div className="eyebrow" style={{ fontSize: 12 }}>Faculties</div>
-            <div className="flex flex-col gap-2 text-sm" style={{ color: 'var(--color-slate-body)' }}>
-              <span>Engineering & Technology</span>
-              <span>Mechanical Engineering</span>
-              <span>Mathematical Sciences</span>
-              <span>Management & Humanities</span>
+            <div className="eyebrow" style={{ fontSize: 12 }}>Institutes</div>
+            <div className="flex flex-wrap gap-x-8 gap-y-2 text-sm" style={{ color: 'var(--color-slate-body)' }}>
+              <div style={{ width: '80%' }}><span>IoT(Institute of Technology)</span></div>
+              <div style={{ width: '100%' }}><span>IBST(Institute of Biosciences and T...)</span></div>
+              <div style={{ width: '90%' }}><span>IMCE(Institute of Management, Commerce and Economics)</span></div>
+              <div style={{ width: '90%' }}><span>ILS(Institute of Legal Studies)</span></div>
+              <div style={{ width: '90%' }}><span>IoP(Institute of Pharmacy)</span></div>
+              
             </div>
           </div>
-
-          {/* API */}
           <div className="flex flex-col gap-4">
-            <div className="eyebrow" style={{ fontSize: 12 }}>API & Data</div>
-            <p style={{ fontSize: 13, color: 'var(--color-slate-body)', lineHeight: 1.55 }}>
-              Powered by Node.js & Express, parsing live Excel datasets.
-            </p>
-            <a
-              href="http://localhost:5000/api/health"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-ghost"
-              style={{ fontSize: 12, padding: '7px 14px', width: 'fit-content' }}
-            >
-              API Status <ExternalLink size={12} />
-            </a>
+            <div className="eyebrow" style={{ fontSize: 12 }}>Institutes</div>
+            <div className="flex flex-wrap gap-x-8 gap-y-2 text-sm" style={{ color: 'var(--color-slate-body)' }}>
+              <div style={{ width: '100%' }}><span>INSH(Institute of Natural Sciences and Humanities)</span></div>
+              <div style={{ width: '100%' }}><span>IER(Institute of Education and Research)</span></div>
+              <div style={{ width: '100%' }}><span>IMS(Institute of Medical Sciences)</span></div>
+              <div style={{ width: '120%' }}><span>IAST(Institute of Agricultural Sciences and Technology)</span></div>
+
+
+            </div>
+
+
+
           </div>
         </div>
 

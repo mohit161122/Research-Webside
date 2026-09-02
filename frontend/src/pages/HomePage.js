@@ -80,7 +80,7 @@ function HomePage({ onSearchOpen }) {
   const isTablet = viewportWidth > 800 && viewportWidth <= 1100;
   const styles = {
     page: { position: "relative", isolation: "isolate", overflow: "hidden", background: "var(--color-paper-white)" },
-    background: { position: "absolute", inset: 0, zIndex: -1, pointerEvents: "none", opacity: 0.5, width: "100%", height: "30%" },
+    background: { position: "absolute", inset: 0, zIndex: -1, pointerEvents: "none", opacity: 0.5, width: "100%", height: "100%" },
     width: { width: isMobile ? "calc(100% - 36px)" : "min(var(--page-max), calc(100% - 48px))", marginInline: "auto" },
     hero: { minHeight: isMobile ? 0 : 540, display: "grid", gridTemplateColumns: isMobile ? "1fr" : isTablet ? "minmax(0, 1fr) minmax(300px, .8fr)" : "minmax(0, 1.05fr) minmax(360px, .95fr)", alignItems: "center", gap: isMobile ? (isSmallMobile ? 26 : 34) : isTablet ? 24 : 5, padding: isMobile ? "30px 0 38px" : "10px 0 48px" },
     heroCopy: { minWidth: 0 },
@@ -250,7 +250,7 @@ function HomePage({ onSearchOpen }) {
                 drift={0.55}
                 autoplay
                 overlayColor="rgba(28, 93, 95, 0.12)"
-                duration={1.6}
+                duration={0.9}
                 ease="power2.inOut"
                 scale={2.3}
                 autoplayDelay={4}
@@ -307,25 +307,28 @@ function HomePage({ onSearchOpen }) {
       )}
 
       <section style={{ ...styles.statStrip, ...styles.width }}>
-        <div style={styles.stat}>
-          <strong style={styles.statValue}>
-            {stats?.totalPapers || 0}
-          </strong>
-          <span style={styles.statLabel}>
-            RESEARCH PAPERS
-          </span>
-        </div>
-
-        <i style={styles.divider} />
+       
 
         <div style={styles.stat}>
           <strong style={styles.statValue}>
             {stats?.totalIndexed || 0}
           </strong>
           <span style={styles.statLabel}>
-            INDEXED JOURNALS
+            Research Publications
           </span>
         </div>
+        
+        <i style={styles.divider} />
+
+         <div style={styles.stat}>
+          <strong style={styles.statValue}>
+            {stats?.totalPapers || 0}
+          </strong>
+          <span style={styles.statLabel}>
+           PATENTS
+          </span>
+        </div>
+
 
         <i style={styles.divider} />
 
